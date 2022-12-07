@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options) { 
         
         }
-       
+       public DbSet<Profile> profiles { get; set; }
+       public DbSet<Education> educations { get; set; }
     }
 }
