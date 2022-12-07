@@ -17,15 +17,16 @@ namespace Models
         public string? Nationality { get; set; }
         public string? Technology { get; set; }
         public string? AboutMe { get; set; }
-        public string? Image { get; set; }
+  
         public string? AboutMeMore { get; set; }
         public string? BirtDay { get; set; }
         public string? Maritial { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? EducationId { get; set; }
-
-        public virtual Education? Education { get; set; }
+        public string? ImageId { get; set; }
+        public virtual Image? Image { get; set; }
+        public virtual ICollection<Education>? Education { get; set; }
 
 
 
