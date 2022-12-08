@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221208193427_Initial")]
-    partial class Initial
+    [Migration("20221208200747_baslangic")]
+    partial class baslangic
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,16 +31,25 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("EndDate")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("ProfileId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ProfileId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("StartDate")
@@ -49,8 +58,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
-
-                    b.HasIndex("ProfileId1");
 
                     b.ToTable("Educations");
                 });
@@ -110,16 +117,13 @@ namespace Data.Migrations
                     b.Property<DateTime>("DateModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EducationId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("EducationId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ImageId1")
+                    b.Property<Guid>("ImageId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
@@ -151,7 +155,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId1");
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Profiles");
                 });
@@ -159,27 +163,23 @@ namespace Data.Migrations
             modelBuilder.Entity("Models.Education", b =>
                 {
                     b.HasOne("Models.Profile", null)
-                        .WithMany("Education")
-                        .HasForeignKey("ProfileId");
-
-                    b.HasOne("Models.Profile", null)
                         .WithMany("Educations")
-                        .HasForeignKey("ProfileId1");
+                        .HasForeignKey("ProfileId");
                 });
 
             modelBuilder.Entity("Models.Profile", b =>
                 {
                     b.HasOne("Models.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId1");
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Models.Profile", b =>
                 {
-                    b.Navigation("Education");
-
                     b.Navigation("Educations");
                 });
 #pragma warning restore 612, 618

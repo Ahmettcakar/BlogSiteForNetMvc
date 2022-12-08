@@ -15,5 +15,6 @@ namespace Data
         }
        public DbSet<Profile> profiles { get; set; }
        public DbSet<Education> educations { get; set; }
+       public DbSet<Image> images { get; set; }
     }
 }

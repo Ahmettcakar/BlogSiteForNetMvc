@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class baslangic : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,9 +45,8 @@ namespace Data.Migrations
                     Maritial = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EducationId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EducationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ImageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateModified = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -57,10 +56,11 @@ namespace Data.Migrations
                 {
                     table.PrimaryKey("PK_Profiles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Profiles_Images_ImageId1",
-                        column: x => x.ImageId1,
+                        name: "FK_Profiles_Images_ImageId",
+                        column: x => x.ImageId,
                         principalTable: "Images",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,7 +72,10 @@ namespace Data.Migrations
                     StartDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EndDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfileId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProfileId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,11 +83,6 @@ namespace Data.Migrations
                     table.ForeignKey(
                         name: "FK_Educations_Profiles_ProfileId",
                         column: x => x.ProfileId,
-                        principalTable: "Profiles",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Educations_Profiles_ProfileId1",
-                        column: x => x.ProfileId1,
                         principalTable: "Profiles",
                         principalColumn: "Id");
                 });
@@ -95,14 +93,9 @@ namespace Data.Migrations
                 column: "ProfileId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Educations_ProfileId1",
-                table: "Educations",
-                column: "ProfileId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Profiles_ImageId1",
+                name: "IX_Profiles_ImageId",
                 table: "Profiles",
-                column: "ImageId1");
+                column: "ImageId");
         }
 
         /// <inheritdoc />

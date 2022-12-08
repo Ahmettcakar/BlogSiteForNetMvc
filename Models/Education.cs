@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 namespace Models
 {
     [Table("Educations")]
-    public class Education
+    public class Education:ModelBase
     {
-        [Key]
-        public Guid Id { get; set; }= Guid.NewGuid();
+        
         public string? Name { get; set; }
         public string? StartDate { get; set; }
         public string? EndDate { get; set; }

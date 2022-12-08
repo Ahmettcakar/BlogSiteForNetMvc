@@ -23,10 +23,10 @@ namespace Models
         public string? Maritial { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
-        public string? EducationId { get; set; }
-        public string? ImageId { get; set; }
+        public Guid EducationId { get; set; }
+        public Guid ImageId { get; set; }
         public virtual Image? Image { get; set; }
-        public virtual ICollection<Education>? Education { get; set; }
+       
         public  List<Education>? Educations { get; set; }
 
 
