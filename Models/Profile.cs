@@ -27,6 +27,7 @@ namespace Models
         public string? ImageId { get; set; }
         public virtual Image? Image { get; set; }
         public virtual ICollection<Education>? Education { get; set; }
+        public  List<Education>? Educations { get; set; }
 
 
 
