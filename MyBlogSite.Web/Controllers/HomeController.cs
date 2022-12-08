@@ -2,16 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 
 using System.Diagnostics;
+using Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyBlogSite.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext db)
         {
-            _logger = logger;
+            _db = db;
         }
 
         public IActionResult Index()
@@ -19,15 +21,14 @@ namespace MyBlogSite.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult GetAll()
         {
-            return View();
+
+            List<Profile> profiles = _db.profiles.Include(e => e.Image).Where(s => s.IsDeleted == false && s.IsActive == true && s.Image.ImageType == "ProfilFoto").ToList();
+
+
+            return Json(profiles);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(/*new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }*/);
-        }
     }
 }
