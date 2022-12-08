@@ -24,7 +24,7 @@ namespace MyBlogSite.Web.Controllers
         public IActionResult GetAll()
         {
 
-            List<Profile> profiles = _db.profiles.Include(e => e.Image).Where(s => s.IsDeleted == false && s.IsActive == true && s.Image.ImageType == "ProfilFoto").ToList();
+            List<Profile> profiles = _db.profiles.Include(e=>e.Educations).Include(i => i.Image).Where(i => i.IsDeleted == false && i.IsActive == true && i.Image.ImageType == "ProfilFoto").ToList();
 
 
             return Json(profiles);
