@@ -11,8 +11,8 @@ namespace Models
     public class Profile:ModelBase
     {
         public string? Name { get; set; }
-        public string? Mission { get; set; }
-        public string? LastMission { get; set; }
+        public string? Job { get; set; }
+        public string? LastJob { get; set; }
         public string? City { get; set; }
         public string? Nationality { get; set; }
         public string? Technology { get; set; }
