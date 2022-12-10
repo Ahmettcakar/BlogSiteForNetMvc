@@ -21,14 +21,26 @@ namespace MyBlogSite.Web.Controllers
             return View();
         }
 
-        public IActionResult GetAll()
+        public IActionResult GetProfile()
         {
+        
+             
+            
+              Profile profile = _db.profiles.Include(e=>e.Educations).Include(i => i.Image).Where(i => i.IsDeleted == false && i.IsActive == true && i.Image.ImageType == "ProfilFoto").FirstOrDefault();
 
-            List<Profile> profiles = _db.profiles.Include(e=>e.Educations).Include(i => i.Image).Where(i => i.IsDeleted == false && i.IsActive == true && i.Image.ImageType == "ProfilFoto").ToList();
+              profile.Educations.AddRange(_db.educations.OrderByDescending(e => e.EndDate).ToList());
 
 
-            return Json(profiles);
+			return Json(profile);
         }
 
-    }
+
+		public IActionResult GetAllEducation()
+		{
+
+
+
+			return Json(_db.educations);
+		}
+	}
 }
