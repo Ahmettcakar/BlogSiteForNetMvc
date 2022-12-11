@@ -704,7 +704,7 @@
 					$("#txtLastJob").text(res.lastJob);
 					$("#txtTechnology").text(res.technology);
 					$("#txtBirtDay").text(res.birtDay);
-					$("#txtExperience").text(res.experience[0].name);
+					$("#txtExperience").text(res.experiences[0].name);
 					$("#txtAboutMe").text(res.aboutMe);
 					$("#aboutMeMore").text(res.aboutMeMore);
 					$("#txtMaritial").text(res.maritial);
@@ -746,7 +746,7 @@
 													<p class="text-color-light"> ${diffDays} Gün</p>
 											<span class="company text-color-light font-weight-semibold">
 														${item.name}
-														<span class="company-location text-color-light font-weight-normal text-uppercase">${item.educationCity}</span>
+														<span class="company-location text-color-light font-weight-normal text-uppercase">${item.experienceCity}</span>
 											</span>
 										</div>
 										<div class="experience-description col-lg-9 col-sm-7 bg-color-light">
