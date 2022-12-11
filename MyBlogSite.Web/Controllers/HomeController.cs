@@ -28,7 +28,7 @@ namespace MyBlogSite.Web.Controllers
             
               Profile profile = _db.profiles.Include(e=>e.Educations).Include(i => i.Image).Where(i => i.IsDeleted == false && i.IsActive == true && i.Image.ImageType == "ProfilFoto").FirstOrDefault();
 
-              profile.Educations.AddRange(_db.educations.OrderByDescending(e => e.EndDate).ToList());
+              profile.Educations.AddRange(_db.educations.OrderByDescending(e => e.EndDate).Where(e=>e.IsActive==true && e.IsDeleted==false).ToList());
 
 
 			return Json(profile);
