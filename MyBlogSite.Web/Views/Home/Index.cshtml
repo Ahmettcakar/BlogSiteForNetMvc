@@ -731,6 +731,7 @@
 		$(document).ready(()=>{
 
          WriteProfile();
+		 GetAllEducation();
 
 		});
 	
@@ -762,6 +763,17 @@
 			});
 		}
 
+		function GetAllEducation(){
+			$.ajax({
+				type:"Get",
+				url:"@Url.Action("GetAllEducation","Home")",
+				success:function(res){
+					
+				}
+
+			});
+
+		}
 
 	</script>
 
