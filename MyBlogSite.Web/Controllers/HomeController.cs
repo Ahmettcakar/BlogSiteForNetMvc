@@ -26,9 +26,9 @@ namespace MyBlogSite.Web.Controllers
         
              
             
-              Profile profile = _db.profiles.Include(e=>e.Educations).Include(i => i.Image).Where(i => i.IsDeleted == false && i.IsActive == true && i.Image.ImageType == "ProfilFoto").FirstOrDefault();
+              Profile profile = _db.profiles.Include(e=>e.Experiences).Include(i => i.Image).Where(i => i.IsDeleted == false && i.IsActive == true && i.Image.ImageType == "ProfilFoto").FirstOrDefault();
 
-              profile.Educations.AddRange(_db.educations.OrderByDescending(e => e.EndDate).Where(e=>e.IsActive==true && e.IsDeleted==false).ToList());
+              profile.Experiences.AddRange(_db.educations.OrderByDescending(e => e.EndDate).Where(e=>e.IsActive==true && e.IsDeleted==false).ToList());
 
 
 			return Json(profile);
@@ -36,7 +36,7 @@ namespace MyBlogSite.Web.Controllers
 
 
 
-		public IActionResult GetAllEducation()
+		public IActionResult GetAllExperience()
 		{
 			return Json(_db.educations.Where(e=>e.IsActive==true && e.IsDeleted==false).OrderByDescending(e=>e.EndDate).ToList());
 		}

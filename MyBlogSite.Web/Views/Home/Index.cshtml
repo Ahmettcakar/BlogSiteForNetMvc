@@ -17,7 +17,7 @@
 							<a data-hash href="#experience" class="btn btn-tertiary text-uppercase custom-btn-style-1 text-1 ms-2">Daha Fazla...</a>
 						</span>
 						<span class="custom-text-color-1 text-uppercase">
-							<strong  class="text-color-light">Son Eğitim: <bold class=" text-color-danger " id="txtEducation"></bold>  </strong>
+							<strong class="text-color-light">Son Eğitim: <bold class=" text-color-danger " id="txtExperience"></bold>  </strong>
 							@*Son eğitim merkezi*@
 							<a data-hash href="#education" class="btn btn-tertiary text-uppercase custom-btn-style-1 text-1 ms-2">Daha Fazla...</a>
 						</span>
@@ -141,8 +141,8 @@
 			<div class="col">
 				<h2 class="text-color-dark text-uppercase font-weight-extra-bold">Deneyimlerim</h2>
 				<section class="timeline custom-timeline" id="timeline">
-					<div class="timeline-body">
-						<article class="timeline-box right custom-box-shadow-2">
+					<div id="ExperienceList" class="timeline-body">
+					@*	<article class="timeline-box right custom-box-shadow-2">
 							<div class="row">
 								<div class="experience-info col-lg-3 col-sm-5 bg-color-primary">
 									<span class="from text-color-light text-uppercase">
@@ -164,53 +164,8 @@
 									<p class="custom-text-color-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt nulla tortor, a imperdiet enim tristique nec. Nulla lobortis leo eget metus dapibus sodales. Sed placerat vitae dui vitae vehicula. Quisque in tincidunt ligula, nec dignissim arcu.</p>
 								</div>
 							</div>
-						</article>
-						<article class="timeline-box right custom-box-shadow-2">
-							<div class="row">
-								<div class="experience-info col-lg-3 col-sm-5 bg-color-primary">
-									<span class="from text-color-light text-uppercase">
-										From
-										<span class="font-weight-semibold">Sep 2012</span>
-									</span>
-									<span class="to text-color-light text-uppercase">
-										To
-										<span class="font-weight-semibold">Present</span>
-									</span>
-									<p class="text-color-light">(3 Years 9 Months)</p>
-									<span class="company text-color-light font-weight-semibold">
-										Okler Themes
-										<span class="company-location text-color-light font-weight-normal text-uppercase">Greater New York</span>
-									</span>
-								</div>
-								<div class="experience-description col-lg-9 col-sm-7 bg-color-light">
-									<h4 class="text-color-dark font-weight-semibold">Chief Product Officer</h4>
-									<p class="custom-text-color-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt nulla tortor, a imperdiet enim tristique nec. Nulla lobortis leo eget metus dapibus sodales. Sed placerat vitae dui vitae vehicula. Quisque in tincidunt ligula, nec dignissim arcu.</p>
-								</div>
-							</div>
-						</article>
-						<article class="timeline-box right custom-box-shadow-2">
-							<div class="row">
-								<div class="experience-info col-lg-3 col-sm-5 bg-color-primary">
-									<span class="from text-color-light text-uppercase">
-										From
-										<span class="font-weight-semibold">Sep 2012</span>
-									</span>
-									<span class="to text-color-light text-uppercase">
-										To
-										<span class="font-weight-semibold">Present</span>
-									</span>
-									<p class="text-color-light">(3 Years 9 Months)</p>
-									<span class="company text-color-light font-weight-semibold">
-										Okler Themes
-										<span class="company-location text-color-light font-weight-normal text-uppercase">Greater New York</span>
-									</span>
-								</div>
-								<div class="experience-description col-lg-9 col-sm-7 bg-color-light">
-									<h4 class="text-color-dark font-weight-semibold">Chief Product Officer</h4>
-									<p class="custom-text-color-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt nulla tortor, a imperdiet enim tristique nec. Nulla lobortis leo eget metus dapibus sodales. Sed placerat vitae dui vitae vehicula. Quisque in tincidunt ligula, nec dignissim arcu.</p>
-								</div>
-							</div>
-						</article>
+						</article>*@
+						
 						<div class="timeline-bar"></div>
 					</div>
 				</section>
@@ -218,6 +173,7 @@
 		</div>
 	</div>
 </section>
+
 
 <section id="education" class="section section-no-border bg-color-light m-0">
 	<div class="container">
@@ -731,7 +687,7 @@
 		$(document).ready(()=>{
 
          WriteProfile();
-		 GetAllEducation();
+			GetAllExperience();
 
 		});
 	
@@ -748,7 +704,7 @@
 					$("#txtLastJob").text(res.lastJob);
 					$("#txtTechnology").text(res.technology);
 					$("#txtBirtDay").text(res.birtDay);
-					$("#txtEducation").text(res.educations[0].name);
+					$("#txtExperience").text(res.experience[0].name);
 					$("#txtAboutMe").text(res.aboutMe);
 					$("#aboutMeMore").text(res.aboutMeMore);
 					$("#txtMaritial").text(res.maritial);
@@ -763,18 +719,53 @@
 			});
 		}
 
-		function GetAllEducation(){
+		function GetAllExperience() {
 			$.ajax({
 				type:"Get",
-				url:"@Url.Action("GetAllEducation","Home")",
+				url: "@Url.Action("GetAllExperience","Home")",
 				success:function(res){
 					
+					
+					for(var item of res){
+						let date2 = new Date(item.endDate.toString())
+						let date1 = new Date(item.startDate.toString());
+						let diffDays = parseInt((date2 - date1) / (1000 * 60 * 60 * 24), 10);
+
+						$("#ExperienceList").append(`
+						<article class="timeline-box right custom-box-shadow-2">
+									<div class="row">
+										<div class="experience-info col-lg-3 col-sm-5 bg-color-primary">
+											<span class="from text-color-light text-uppercase">
+												Başlangıç 
+												<span class="font-weight-semibold">${item.startDate}</span>
+											</span>
+											<span class="to text-color-light text-uppercase">
+												Bitiş 
+												<span class="font-weight-semibold">${item.endDate}</span>
+											</span>
+													<p class="text-color-light"> ${diffDays} Gün</p>
+											<span class="company text-color-light font-weight-semibold">
+														${item.name}
+														<span class="company-location text-color-light font-weight-normal text-uppercase">${item.educationCity}</span>
+											</span>
+										</div>
+										<div class="experience-description col-lg-9 col-sm-7 bg-color-light">
+													<h4 class="text-color-dark font-weight-semibold">${item.name}</h4>
+													<p class="custom-text-color-2">${item.description}</p>
+										</div>
+									</div>
+								</article>`)
+
+
+					}
 				}
 
 			});
 
 		}
 
+		
+		
 	</script>
 
 }								

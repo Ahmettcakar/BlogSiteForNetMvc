@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    [Table("Educations")]
-    public class Education:ModelBase
+    [Table("Experience")]
+    public class Experience:ModelBase
     {
         
         public string? Name { get; set; }
-        public string? EducationCity { get; set; }
+        public string? ExperienceCity { get; set; }
         public string? Description { get; set; }
         public string? StartDate { get; set; }
         public string? EndDate { get; set; }
