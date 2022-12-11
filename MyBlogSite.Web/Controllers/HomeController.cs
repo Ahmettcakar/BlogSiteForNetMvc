@@ -35,12 +35,10 @@ namespace MyBlogSite.Web.Controllers
         }
 
 
+
 		public IActionResult GetAllEducation()
 		{
-
-
-
-			return Json(_db.educations);
+			return Json(_db.educations.Where(e=>e.IsActive==true && e.IsDeleted==false).OrderByDescending(e=>e.EndDate).ToList());
 		}
 	}
 }
