@@ -7,18 +7,18 @@
 				</div>
 				<div class="col-lg-6 col-xl-5">
 					<h1 id="txtName" class="text-color-primary custom-font-size-1">@*NAME*@</h1>
-					<p id="txtJob" class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">Job Gelecek</p>
+					<p id="txtJob" class="text-color-light font-weight-normal custom-font-size-2 custom-margin-bottom-1">@*Job*@</p>
 					<span class="custom-about-me-infos">
-						<span class="custom-text-color-1 text-uppercase">City And Nationality</span>
-						<span class="custom-text-color-1 text-uppercase mb-3">Teknoloji</span>
+						<span id="txtCityNationatily" class="custom-text-color-1 text-uppercase">@*City And Nationality*@</span>
+						<span id="txtTechnology" class="custom-text-color-1 text-uppercase mb-3">@*Teknoloji*@</span>
 						<span class="custom-text-color-1 text-uppercase">
-							<strong id="LastJob" class="text-color-light">Önceki İş: </strong>
-							Front-End Developer at Porto
+							<strong class="text-color-light">Önceki İş: <bold class=" text-color-danger text" id="txtLastJob">@*lastjob*@</bold></strong>
+							
 							<a data-hash href="#experience" class="btn btn-tertiary text-uppercase custom-btn-style-1 text-1 ms-2">Daha Fazla...</a>
 						</span>
 						<span class="custom-text-color-1 text-uppercase">
-							<strong id="Education" class="text-color-light"> Eğitim: </strong>
-							Son eğitim merkezi
+							<strong  class="text-color-light">Son Eğitim: <bold class=" text-color-danger " id="txtEducation"></bold>  </strong>
+							@*Son eğitim merkezi*@
 							<a data-hash href="#education" class="btn btn-tertiary text-uppercase custom-btn-style-1 text-1 ms-2">Daha Fazla...</a>
 						</span>
 					</span> 
@@ -89,32 +89,29 @@
 							<div class="col-md-6">
 								<ul class="custom-list-style-1 p-0 mb-0">
 									<li>
-										<span class="text-color-dark">Doğum Tarihi:</span>
-										<span class="custom-text-color-2">1990 October 2</span>
+										<span class="text-color-dark">Doğum Tarihi: </span>
+										<span id="txtBirtDay"> class="custom-text-color-2"></span>
 									</li>
 									<li>
-										<span class="text-color-dark">Medeni Hal:</span>
-										<span class="custom-text-color-2">Single</span>
+										<span class="text-color-dark">Medeni Hal: </span>
+										<span id="txtMaritial" class="custom-text-color-2"></span>
 									</li>
 									<li>
 										<span class="text-color-dark">Ülke:</span>
-										<span class="custom-text-color-2">American</span>
+										<span id="txtNationality" class="Nationality custom-text-color-2"></span>
 									</li>
 								</ul>
 							</div>
 							<div class="col-md-6">
 								<ul class="custom-list-style-1 p-0 mb-0">
-									<li>
-										<span class="text-color-dark">Skype:</span>
-										<span class="custom-text-color-2"><a class="custom-text-color-2" href="skype:yourskype?chat">yourskype</a></span>
-									</li>
+									
 									<li>
 										<span class="text-color-dark">Telefon:</span>
-										<span class="custom-text-color-2"><a class="custom-text-color-2" href="tel:123456789">123-456-789</a></span>
+										<span class="custom-text-color-2"><a id="txtPhone" class="custom-text-color-2" href="tel:123456789"></a></span>
 									</li>
 									<li>
-										<span class="text-color-dark">Mail Adresi:</span>
-										<span class="custom-text-color-2"><a class="custom-text-color-2" href="mailto:me@domain.com">me@domain.com</a></span>
+										<span class="text-color-dark">  Mail Adresi</span>
+										<span class="custom-text-color-2"><a id="txtMail" class="custom-text-color-2" href="mailto:me@domain.com"></a></span>
 									</li>
 								</ul>
 							</div>
@@ -123,15 +120,12 @@
 
 					<h2 class="text-color-dark font-weight-extra-bold text-uppercase">Hakkımda</h2>
 
-					<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+					<p id="txtAboutMe"></p>
 
 					<div class="about-me-more" id="aboutMeMore">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt nulla tortor, a imperdiet enim tristique nec. Nulla lobortis leo eget metus dapibus sodales. Sed placerat vitae dui vitae vehicula. Quisque in tincidunt ligula, nec dignissim arcu. Praesent aliquam velit vel libero dictum, non sollicitudin lectus mollis. Morbi sollicitudin auctor gravida. Vivamus vitae dui non lorem euismod pretium. Morbi congue sem sed ex iaculis, nec mattis felis pretium. Nullam molestie libero id odio blandit sodales. Suspendisse non mauris et felis molestie placerat aliquet a risus. Aliquam ac leo tempus, hendrerit eros mollis, gravida est.</p>
-
-						<p>Proin euismod ipsum a tellus condimentum dapibus. Integer porttitor felis elit, eget rutrum ligula commodo quis. Praesent ultricies neque eu mi congue blandit. Nulla feugiat feugiat aliquet. Morbi sed mattis erat. Nullam scelerisque molestie eros, id tristique felis iaculis non. Duis pellentesque neque eget iaculis varius. Donec at nisl semper, aliquam est id, tincidunt lacus. Donec at erat purus.</p>
-
-						<p>Morbi tincidunt nunc non diam porta, at fermentum orci bibendum. Donec arcu nisi, ornare nec commodo vitae, sollicitudin sed magna. Cras sit amet justo et nulla pulvinar laoreet. Phasellus scelerisque, metus id posuere vulputate, diam tellus iaculis sapien, eget scelerisque ipsum libero convallis velit. Duis lorem ligula, faucibus quis tellus nec, fringilla ultricies leo. Etiam tempus congue magna. Suspendisse porta dictum tortor, eu volutpat ipsum eleifend nec. Aliquam dapibus lorem luctus, cursus libero imperdiet, mattis nunc. Sed in ipsum diam. Quisque efficitur metus purus, vitae fermentum lacus venenatis id.</p>
+						
 					</div>
+
 
 					<a id="aboutMeMoreBtn" class="btn btn-tertiary text-uppercase custom-btn-style-1 text-1" href="#">Daha Fazla...</a>
 
@@ -747,10 +741,20 @@
 			   type:"Get",
 			   url:"@Url.Action("GetProfile","Home")",
 			   success:function(res){
-				   console.log(res.name);
-				  
-				 
-				   
+				   $("#txtName").text(res.name);
+				   $("#txtJob").text(res.job);
+					$("#txtCityNationatily").text(res.nationality + "  " + res.city);
+					$("#txtLastJob").text(res.lastJob);
+					$("#txtTechnology").text(res.technology);
+					$("#txtBirtDay").text(res.birtDay);
+					$("#txtEducation").text(res.educations[0].name);
+					$("#txtAboutMe").text(res.aboutMe);
+					$("#aboutMeMore").text(res.aboutMeMore);
+					$("#txtMaritial").text(res.maritial);
+					$("#txtNationality").text(res.nationality);
+					$("#txtPhone").text(res.phone);
+					$("#txtMail").text(res.email);
+
 			   }
 
 
