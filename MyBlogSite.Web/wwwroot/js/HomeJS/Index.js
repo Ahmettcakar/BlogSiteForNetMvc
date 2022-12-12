@@ -2,7 +2,8 @@
 		$(document).ready(()=>{
 
 		    WriteProfile();
-		    GetAllExperience();
+			GetAllExperience();
+			GetAllEducation();
 		
 		
 
@@ -87,6 +88,7 @@
 			type: "Get",
 			url: "/Home/GetAllEducation",
 			success: function (res) {
+
 				for (let i = 0; i < res.length; i += 2) {
 					var content1 = `
                      
@@ -119,8 +121,8 @@
 				}
 			}
 		
-        });
-
+		});
+		
 }
 
 function DateToFullYear(date1, date2) {//DATETİME convert YEAR
