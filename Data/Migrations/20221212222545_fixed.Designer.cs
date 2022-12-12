@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212222545_fixed")]
+    partial class @fixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +64,7 @@ namespace Data.Migrations
 
                     b.HasIndex("ProfileId");
 
-                    b.ToTable("Education", (string)null);
+                    b.ToTable("Education");
                 });
 
             modelBuilder.Entity("Models.Experience", b =>
@@ -104,7 +107,7 @@ namespace Data.Migrations
 
                     b.HasIndex("ProfileId");
 
-                    b.ToTable("Experience", (string)null);
+                    b.ToTable("Experience");
                 });
 
             modelBuilder.Entity("Models.Image", b =>
@@ -135,7 +138,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Images", (string)null);
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Models.Profile", b =>
@@ -199,7 +202,7 @@ namespace Data.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.ToTable("Profiles", (string)null);
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("Models.Education", b =>

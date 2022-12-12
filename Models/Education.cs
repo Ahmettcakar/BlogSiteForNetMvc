@@ -10,10 +10,14 @@ namespace Models
 	[Table("Education")]
 	public class Education:ModelBase
 	{
-		public Guid? ProfilId { get; set; }
+		
 		public string name { get; set; }
 		public string description { get; set; }
 		public DateTime startDate { get; set; }
 		public DateTime endDate { get; set; }
+
+		public Guid? ProfileId { get; set; }
+		public virtual Profile profile { get; set; }
+
 	}
 }
