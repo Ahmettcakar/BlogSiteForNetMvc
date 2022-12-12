@@ -10,7 +10,7 @@ namespace Models
 	[Table("Education")]
 	public class Education:ModelBase
 	{
-		public Guid ProfilId { get; set; }
+		public Guid? ProfilId { get; set; }
 		public string name { get; set; }
 		public string description { get; set; }
 		public DateTime startDate { get; set; }

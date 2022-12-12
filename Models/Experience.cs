@@ -11,7 +11,7 @@ namespace Models
     [Table("Experience")]
     public class Experience:ModelBase
     {
-		public Guid ProfilId { get; set; }
+		public Guid? ProfilId { get; set; }
 		public string? Name { get; set; }
         public string? ExperienceCity { get; set; }
         public string? Description { get; set; }
