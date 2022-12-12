@@ -27,7 +27,7 @@ namespace Models
         public Guid ImageId { get; set; }
         public virtual Image? Image { get; set; }
         public  List<Experience>? Experiences { get; set; }
-        public  List<Edıcation>? Educations { get; set; }
+        public  List<Education>? Educations { get; set; }
 
 
 
