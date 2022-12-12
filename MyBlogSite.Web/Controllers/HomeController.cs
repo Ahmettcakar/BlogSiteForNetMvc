@@ -40,5 +40,11 @@ namespace MyBlogSite.Web.Controllers
 		{
 			return Json(_db.experiences.Where(e=>e.IsActive==true && e.IsDeleted==false).OrderByDescending(e=>e.EndDate).ToList());
 		}
+
+		public IActionResult GetAllEducation()
+		{
+			return Json(_db.educations.Where(e => e.IsActive == true && e.IsDeleted == false).OrderByDescending(e => e.endDate).ToList());
+		}
+
 	}
 }
