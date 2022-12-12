@@ -2,7 +2,8 @@
 		$(document).ready(()=>{
 
 		WriteProfile();
-	    GetAllExperience();
+		GetAllExperience();
+		
 
 		});
 
@@ -77,6 +78,24 @@
 
 		});
 
-		}
+}
+
+    function GetAllEducation() {
+
+		$.ajax({
+			type: "Get",
+			url: "/Home/GetAllEducation",
+			success: function (res) {
+				console.log("Başarılı");
+
+				}
+
+			
+			
+			
+		});
+
+}
+    
 
 
