@@ -1,8 +1,9 @@
 ﻿
 		$(document).ready(()=>{
 
-		WriteProfile();
-		GetAllExperience();
+		    WriteProfile();
+		    GetAllExperience();
+		
 		
 
 		});
@@ -81,21 +82,54 @@
 }
 
     function GetAllEducation() {
-
+		
 		$.ajax({
 			type: "Get",
 			url: "/Home/GetAllEducation",
 			success: function (res) {
-				console.log("Başarılı");
+				for (let i = 0; i < res.length; i += 2) {
+					var content1 = `
+                     
+						<div class="col-lg-6 col-sm-6 pb-4">
+							<div class="custom-box-details-2 bg-color-light custom-box-shadow-3">
+								<i class="icon-graduation icons text-color-primary"></i>
+								<h4 class="font-weight-semibold text-color-dark m-0">${res[i].name}</h4>
+								<p class="custom-text-color-2 mb-1">${res[i].description}</p>
+								<strong class="text-color-primary">${DateToFullYear(res[i].startDate, res[i].endDate)} </strong>
+							</div>
+						</div>
+                        
+					`
+					if (res.length - i != 1) {
+						var content2 = ` <div class="col-lg-6 col-sm-6 pb-4">
+							<div class="custom-box-details-2 bg-color-light custom-box-shadow-3">
+								<i class="icon-graduation icons text-color-primary"></i>
+								<h4 class="font-weight-semibold text-color-dark m-0">${res[i + 1].name}</h4>
+								<p class="custom-text-color-2 mb-1">${res[i + 1].description}</p>
+								<strong class="text-color-primary">${DateToFullYear(res[i+1].startDate, res[i+1].endDate)}</strong>
+							</div>
+						  </div>`
+					}
+				
+					else {
+						content2 = "";
+					}
+					$("#EducationList").append("<div class='row'>" + content1 + content2 + "</div>")
 
 				}
-
-			
-			
-			
-		});
+			}
+		
+        });
 
 }
+
+function DateToFullYear(date1, date2) {//DATETİME convert YEAR
+
+	return date1.split("-")[0] + "-" + date2.split("-")[0];
+}
+
+
     
 
 
+	
