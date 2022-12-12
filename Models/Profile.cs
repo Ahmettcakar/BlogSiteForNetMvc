@@ -23,11 +23,11 @@ namespace Models
         public string? Maritial { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
-        public Guid EducationId { get; set; }
+        
         public Guid ImageId { get; set; }
         public virtual Image? Image { get; set; }
-       
         public  List<Experience>? Experiences { get; set; }
+        public  List<Edıcation>? Educations { get; set; }
 
 
 
