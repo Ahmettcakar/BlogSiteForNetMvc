@@ -17,7 +17,6 @@ namespace Models
         public string? Nationality { get; set; }
         public string? Technology { get; set; }
         public string? AboutMe { get; set; }
-  
         public string? AboutMeMore { get; set; }
         public string? BirtDay { get; set; }
         public string? Maritial { get; set; }
