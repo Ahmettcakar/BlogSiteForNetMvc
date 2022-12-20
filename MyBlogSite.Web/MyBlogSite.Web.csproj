@@ -24,7 +24,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\assets\css\" />
-    <Folder Include="wwwroot\assets\libs\" />
+    <Folder Include="wwwroot\assets\libs\jquery.repeater\src\" />
+    <Folder Include="wwwroot\assets\libs\jquery.repeater\test\" />
   </ItemGroup>
 
 </Project>
