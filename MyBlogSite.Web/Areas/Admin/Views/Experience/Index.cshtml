@@ -51,6 +51,14 @@
 
         function loadTable(){
 
+
+
+
+
+
+
+
+
             $.ajax({
                 type: "Get",
                 url: "@Url.Action("GetAllExperience","Experience")",
@@ -78,6 +86,8 @@
                     });
                     $("#tablo").DataTable();
 
+                
+
                 }
             });
 
@@ -86,39 +96,53 @@
         function updateExperience(res,dataId){  
            
 
-           var resData={
-                            id:dataId,
-                            name:res.name,
-                            description:res.description,
-                            endDate: res.endDate,
-                            startDate:res.startDate,
-                            experienceCity:res.experienceCity
-                          
-                            
-                        }
+
+
+            
+            Swal.fire({
+         title: 'Kaydetmek İstediğinizden Emin Misiniz',
+      
+            showCancelButton: true,
+            confirmButtonText: 'Kaydet',
+            
+   }).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+
+                    var resData = {
+                        id: dataId,
+                        name: res.name,
+                        description: res.description,
+                        endDate: res.endDate,
+                        startDate: res.startDate,
+                        experienceCity: res.experienceCity
+
+
+                    }
 
 
 
 
-            $.post("/Admin/Experience/UpdateExperience", { experience: resData }, function (data) {
-               
-            });
+                    $.post("/Admin/Experience/UpdateExperience", { experience: resData }, function (data) {
 
+                    });
 
-
-
-
+    Swal.fire('Kayıt Başarılı!', '', 'Başarılı')
+  }
+})
 
        }
 
         function editableTable(dataId){
-         
+      
                 var e = {};
                 $("#tablo tr").editable({
-                    
+                   
+                
+
                     edit: function (res) {
-                     
-                        $(".edit  i", this).removeClass("fa-pencil-alt").addClass("fa-save").attr("title", "Save");
+                      
+                        $(".edit  i", this).removeClass("fa-pencil-alt").addClass("fa-save").attr("title", "Kaydet");
                         
                     },
                     
@@ -133,7 +157,7 @@
                         
                       
                         
-                    $(".edit i", this).removeClass("fa-save").addClass("fa-pencil-alt").attr("title", "Edit"), this in e && (e[this].destroy(), delete e[this]);
+                    $(".edit i", this).removeClass("fa-save").addClass("fa-pencil-alt").attr("title", "Düzenle"), this in e && (e[this].destroy(), delete e[this]);
                     },
                 });
             
