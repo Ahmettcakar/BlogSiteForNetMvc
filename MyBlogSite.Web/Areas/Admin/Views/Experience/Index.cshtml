@@ -1,7 +1,4 @@
-﻿@section css{
-
-
-}
+﻿
 
 
 <div class="row">
@@ -18,12 +15,12 @@
                             <tr>
                                
                                 <th>Ad</th>
-                                <th>Açıklama</th>
-                                <th>Başlangıç</th>
-                                <th>Bitiş</th>
                                 <th>Şehir</th>
+                                <th>Açıklama</th>
+                                <th>Başlangıç Tarihi</th>
+                                <th>Bitiş Tarihi</th> 
                                 <th>ProfileId</th>
-                                <th>Edit</th>
+                                <th>İşlemler</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody" >
@@ -44,56 +41,97 @@
             <script src="~/assets/libs/table-edits/build/table-edits.min.js"></script>
 
 <script type="text/javascript">
+
         $(document).ready(function(){
-           
+
+          loadTable();
+;
+          
+        }); 
+
+        function loadTable(){
+
             $.ajax({
-                type:"Get",
-                url:"@Url.Action("GetAllExperience","Experience")",
-                success:function(res){
-                    $.each(res,function(index,item){
-                    
+                type: "Get",
+                url: "@Url.Action("GetAllExperience","Experience")",
+                success: function (res) {
+
+                    $.each(res, function (index, item) {
+
                         $("#tableBody").append(`
-                                         <tr data-id="${index+1}">
-                                        <td data-field="name" style="width: 80px">${item.name}</td>
-                                                <td data-field="description">${item.description}</td>
-                                                <td data-field="startDate">${item.startDate}</td>
-                                                <td data-field="endDate">${item.endDate}</td>
-                                                <td data-field="experienceCity">${item.experienceCity}</td>
-                                                <td data-field-noneEdit="profileId">${item.profileId}</td>
-                                        <td style="width: 100px">
-                                                       <a  class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                       <i  class="fas fa-pencil-alt"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                    `);
-                    
-                    
+                                                                <tr data-id="${index + 1}">
+                                                                <td data-field="name" style="width: 80px">${item.name}</td>
+                                                                 <td data-field="experienceCity">${item.experienceCity}</td>
+                                                                <td data-field="description">${item.description}</td>
+                                                                <td data-field="startDate">${item.startDate}</td>
+                                                                <td data-field="endDate">${item.endDate}</td>                                   
+                                                                <td data-field-noneEdit="profileId">${item.profileId}</td>
+                                                        <td style="width: 100px">
+                                                                               <a onclick="editableTable('${item.id}')"  class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                                               <i  class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                           </tr>
+                                    `);
+
+
                     });
+                    $("#tablo").DataTable();
+
                 }
             });
-            
-        });
+
+        }
+
+        function updateExperience(res,dataId){  
+           
+
+           var resData={
+                            id:dataId,
+                            name:res.name,
+                            description:res.description,
+                            endDate: res.endDate,
+                            startDate:res.startDate,
+                            experienceCity:res.experienceCity
+                          
+                            
+                        }
 
 
-        function editableTable(){
+
+
+            $.post("/Admin/Experience/UpdateExperience", { experience: resData }, function (data) {
+               
+            });
+
+
+
+
+
+
+       }
+
+        function editableTable(dataId){
          
                 var e = {};
                 $("#tablo tr").editable({
                     
-                    edit: function (t) {
-                        console.log(t);
+                    edit: function (res) {
+                     
                         $(".edit  i", this).removeClass("fa-pencil-alt").addClass("fa-save").attr("title", "Save");
                         
                     },
                     
-                    save: function (t) {
-                        $(".edit i ", this).removeClass("fa-save").addClass("fa-pencil-alt").attr("title", "Save"), this in e && (e[this].destroy(), delete e[this]);
+                    save: function (res) {
+                        $(".edit i ", this).removeClass("fa-save").addClass("fa-pencil-alt").attr("title", "Edit"), this in e && (e[this].destroy(), delete e[this]);           
+                         updateExperience(res,dataId);
+                       
                         
+
                     },
-                    cancel: function (t) {
+                    cancel: function (data) {
                         
-                        console.log(t);
+                      
                         
                     $(".edit i", this).removeClass("fa-save").addClass("fa-pencil-alt").attr("title", "Edit"), this in e && (e[this].destroy(), delete e[this]);
                     },
@@ -101,6 +139,7 @@
             
 
         }
+
 </script>
            
 

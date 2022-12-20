@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace MyBlogSite.Web.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	public class Education : Controller
+	public class EducationController : Controller
 	{
 		private readonly ApplicationDbContext _db;
 
-		public Education(ApplicationDbContext db)
+		public EducationController(ApplicationDbContext db)
 		{
 			_db = db;
 		}
