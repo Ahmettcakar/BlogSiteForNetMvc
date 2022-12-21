@@ -49,6 +49,15 @@ namespace MyBlogSite.Web.Areas.Admin.Controllers
             _db.SaveChanges();
 
             return Json("Başarılı");
+        } 
+        public IActionResult DeleteExperience(Experience experience)
+        {
+            Experience e=_db.experiences.Find(experience.Id);
+            e.DateModified = DateTime.Now;
+            e.IsDeleted = true;
+            _db.experiences.Update(e);
+            _db.SaveChanges();
+            return Json(e);
         }
 
 

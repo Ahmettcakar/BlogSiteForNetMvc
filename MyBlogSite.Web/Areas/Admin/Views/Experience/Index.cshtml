@@ -150,8 +150,9 @@
                                                                 <td data-field="endDate">${item.endDate}</td>                                   
                                                                 <td data-field-noneEdit="profileId">${item.profileId}</td>
                                                         <td style="width: 100px">
-                                                                               <a onclick="editableTable('${item.id}')"  class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                               <i  class="fas fa-pencil-alt"></i>
+                                                                               <a onclick="editableTable('${item.id}')"  class="btn btn-outline-secondary btn-sm edit" title="Düzenle">
+                                                                                               <i  class="fas fa-pencil-alt"></i> <a  onclick="deleteExperience('${item.id}')" class="btn btn-outline-danger btn-sm delete" title="Sil">
+                                                                                               <i class="fas fa-trash"></i>
                                                             </a>
                                                         </td>
                                                            </tr>
@@ -178,7 +179,7 @@
             confirmButtonText: 'Kaydet',
             
    }).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
+  
                  if (result.isConfirmed) {
 
                     var resData = {
@@ -194,7 +195,7 @@
                     });
 
                       Swal.fire('Kayıt Başarılı!', 'Başarılı')
-  }
+                 }
                })
 
        }
@@ -247,6 +248,36 @@
                     $("#btnAddExperience").off("click");
                 },
             })
+        }
+
+        function deleteExperience(id){
+            Swal.fire({
+                title: 'Silmek İstediğinizden Emin Misiniz',
+
+                showCancelButton: true,
+                confirmButtonText: 'Evet',
+
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+
+            var veri={
+                id:id
+            }
+            $.ajax({
+            type:"POST",
+            url:"@Url.Action("DeleteExperience","Experience")",
+            data:veri,
+            success:function(data){
+                $("#tablo tr").remove();
+                dataTable();
+            }
+            });
+
+
+                Swal.fire('Silme İşlemi Başarılı!', 'Başarılı')
+            }
+                       })
         }
 
         function AddExperience(){
