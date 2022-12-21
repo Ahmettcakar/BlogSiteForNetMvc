@@ -282,7 +282,22 @@
                 url: "@Url.Action("AddExperience","Experience")",
                 data:{experiences:experiences},
                 success:function(data){
-                    console.log(data);
+                    $("#modal").modal("hide");
+
+                    $(".row .form").each(function (index, item) {
+
+                                item.children[0].children[1].value="";
+                                item.children[1].children[1].value="";
+                                item.children[2].children[1].value="";
+                                item.children[3].children[1].value="";
+                                item.children[4].children[1].value="";
+                           
+
+                    });
+                    $("#btnSaveExperience").off();
+                    $("#tablo tr").remove();
+                    dataTable();
+                   
                 }
 
 

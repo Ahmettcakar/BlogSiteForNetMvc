@@ -45,12 +45,10 @@ namespace MyBlogSite.Web.Areas.Admin.Controllers
 
         public IActionResult AddExperience(List<Experience> experiences)
         {
-            
-            foreach(var item in experiences)
-            {
-            }
+            _db.experiences.AddRange(experiences);
+            _db.SaveChanges();
 
-            return Json("başarılı");
+            return Json("Başarılı");
         }
 
 
