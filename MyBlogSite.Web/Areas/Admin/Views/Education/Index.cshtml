@@ -1,7 +1,10 @@
 ﻿@{
 
 }
+@section css{
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+}
 
 <div class="row">
     <div class="col-12">
@@ -9,35 +12,23 @@
             <div class="card-body">
 
                 <h4 class="card-title">Buttons example</h4>
-                <p class="card-title-desc">
-                    The Buttons extension for DataTables
-                    provides a common set of options, API methods and styling to display
-                    buttons on a page that will interact with a DataTable. The core library
-                    provides the based framework upon which plug-ins can built.
-                </p>
+                
 
                 <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Eğitim Kurumu</th>
+                            <th>Açıklama</th>
+                            <th>Başlangıç Tarihi</th>
+                            <th>Bitiş Tarihi</th>
+                            <th>ProfileId </th>
+                            <th>İşlemler</th>
                         </tr>
                     </thead>
 
 
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
+                       
                     </tbody>
                 </table>
             </div>
@@ -45,48 +36,47 @@
     </div> <!-- end col -->
 </div> <!-- end row -->
 @section Scripts{
-
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function (){
+            var dataTable;
+           
+            $.ajax({
+                type:"Get",
+                url: "@Url.Action("GetAllEducation","Education")",
+                success:function(res){
 
-   var data= $.ajax({
-        type:"Get",
-        url:"/Admin/Education/GetAllEducation",
-        success:function(res){
+                   dataTable=("#datatable-buttons").DataTable({
+                        ajax: res,
+                        lengthchange: !1,
+                        buttons: ["copy", "excel", "pdf", "colvis"],
+                        columns: [
+                            { "data": "name" },
+                            { "data": "description" },
+                            { "data": "startdate" },
+                            { "data": "enddate" },
+                            { "data": "profileıd" },
+                            {
+                                "data": "id", render: function (data) {
 
-            
+                                    return `<a onclick=""  class="btn btn-outline-secondary btn-sm edit" title="düzenle">
+                                       <a onclick=""  class="btn btn-outline-secondary btn-sm edit" title="sil">
+                                    `
 
-        }
-    });
+                                }
 
+                            }
 
+                        ]
+                    }).buttons().container().appendto("#datatable-buttons_wrapper .col-md-6:eq(0)");
 
-            var DataTable = function WriteEducation() {
+                }
+            });
 
-
-             ("#datatable-buttons").DataTable({
-                ajax: data,
-                lengthChange: !1,
-                buttons: ["copy", "excel", "pdf", "colvis"],
-                columns: [
-                    { "data": "name" },
-                    { "data": "description" },
-                    { "data": "startDate" },
-                    { "data": "endDate" },
-                    { "data": "id" }
-
-                ]
-            }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)")
-               
-
-        
-    }
-
-
-
-
-    });
+          
    
+    });
+
 </script>
 }

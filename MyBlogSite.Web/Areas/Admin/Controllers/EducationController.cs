@@ -20,7 +20,7 @@ namespace MyBlogSite.Web.Areas.Admin.Controllers
 
 		public IActionResult GetAllEducation()
 		{
-			return Json(_db.educations.Where(e => e.IsActive == true && e.IsDeleted == false).OrderByDescending(e => e.endDate).ToList());
+			return Json(new {data=_db.educations.Where(e => e.IsActive == true && e.IsDeleted == false).OrderByDescending(e => e.endDate).ToList() });
 		}
 
 
