@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <button id="btnExperienceAdd" onclick="AddExperience()" class="btn btn-success waves-effect waves-light" type="submit">Deneyim Ekle</button>
+                <button id="btnExperienceAdd" onclick="AddExperience()" class="btn btn-success waves-effect waves-light" type="submit">Deneyimlerinizi Eklemek İçin Tıklayınız</button>
                 <hr>
                 <h4 class="card-title">Table Edits</h4>
                 <p class="card-title-desc">Table Edits is a lightweight jQuery plugin for making table rows editable.</p>
@@ -47,7 +47,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myExtraLargeModalLabel">Deneyimlerinizi Ekleyiniz</h5>
+                <h5 class="modal-title" id="myExtraLargeModalLabel">Deneyimler</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
@@ -59,49 +59,54 @@
                                 <h4 class="card-title mb-4">Example</h4>
                                 <form id="repeater"  class="repeater"  enctype="multipart/form-data">
                                     <div data-repeater-list="group-a">
-                                        <div data-repeater-item class="row">
+                                        <div  data-repeater-item class="row form">
                                             <div class="mb-3 col-sm-2">
-                                                <label class="form-label" for="name"> Ad-Soyad:</label>
-                                                <input type="text" id="name" name="untyped-input" class="form-control" placeholder="" />
+                                                <label class="form-label" for="name">Deneyim Yeriniz</label>
+                                                <input type="text" id="name"  name="untyped-input" class="form-control" placeholder="" />
                                             </div>
 
                                             <div class="mb-3 col-sm-2">
-                                                <label class="form-label" for="email">Şehir:</label>
-                                                <input type="email" id="email" class="form-control" placeholder="" />
+                                                <label class="form-label" for="experienceCity">Şehir</label>
+                                                <input type="email" id="experienceCity" name="experienceCity" class="form-control" placeholder="" />
                                             </div>
 
-                                             <div class="mb-3 col-lg-3">
-                                                        <label class="form-label" for="message">Açıklama:</label>
-                                                        <textarea id="message" class="form-control" placeholder=""></textarea>
-                                             </div>
+                                            
 
                                             <div class="mb-3 col-sm-2">
-                                                <label class="form-label" for="subject">Başlangıç Tarihi:</label>
-                                                <input type="text" id="subject" class="form-control" placeholder="" />
+                                                <label class="form-label" for="startDate">Başlangıç Tarihi</label>
+                                                <input type="text" id="startDate" name="startDate" class="form-control" placeholder="" />
                                             </div>
 
                                             <div class="mb-3 col-sm-2">
-                                                <label class="form-label" for="subject">Bitiş Tarihi:</label>
-                                                <input type="text" id="subject" class="form-control" placeholder="" />
+                                                <label class="form-label" for="endDate">Bitiş Tarihi</label>
+                                                <input type="text" id="endDate" name="endDate" class="form-control" placeholder="" />
                                             </div>
-
-                                           
-
+                                            <div class="mb-3 col-lg-3">
+                                                <label class="form-label" for="description">Açıklama</label>
+                                                <textarea name="description" id="description"  class="form-control" placeholder=""></textarea>
+                                            </div>
+                                                
                                             <div class="col-sm-1 align-self-center">
                                                 <div class="d-grid">
-                                                    <input data-repeater-delete type="button" class="btn btn-primary" value="Delete" />
+                                                    <input data-repeater-delete type="button" class="btn btn-primary" value=" Sil" />
                                                 </div>
                                             </div>
                                         </div>
+                                        <input id="profileId" type="hidden" class="btn btn-primary" value="" />
 
                                     </div>
-                                    <input id="btnAddExperience" data-repeater-create type="button" class="btn btn-success mt-3 mt-lg-0" value="Add" />
+                                    <input id="btnAddExperience" data-repeater-create type="button" class="btn btn-success mt-3 mt-lg-0" value="Yeni Deneyim" />
+                                    <input id="btnSaveExperience" type="button" onclick="saveExperience()"  class="btn btn-info mt-3 mt-lg-0" value="Kaydet" />
+                                    
                                 </form>
+                              
                             </div>
+                           
                         </div>
                     </div>
+                   
                 </div>
-
+               
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -155,6 +160,8 @@
 
                     });
                   var dt= $("#tablo").DataTable();
+                    $("#profileId").val(res[0].profileId);
+                    
 
                    return dt;
 
@@ -164,11 +171,6 @@
         }
 
         function updateExperience(res,dataId){  
-           
-
-
-
-            
            Swal.fire({
          title: 'Kaydetmek İstediğinizden Emin Misiniz',
       
@@ -258,7 +260,37 @@
         
 
         }
-        
+
+        function saveExperience(){
+           var experiences=[];
+          $(".row .form").each(function(index,item){
+
+                experiences.push(
+                         {
+                    profileId: $("#profileId").val(),
+                    name: item.children[0].children[1].value,
+                    experienceCity: item.children[1].children[1].value,
+                    startDate: item.children[2].children[1].value,
+                    endDate: item.children[3].children[1].value,
+                    description: item.children[4].children[1].value
+                    });
+             
+            });
+           
+         $.ajax({
+                type:"POST",
+                url: "@Url.Action("AddExperience","Experience")",
+                data:{experiences:experiences},
+                success:function(data){
+                    console.log(data);
+                }
+
+
+
+
+         });
+           
+        }
 </script>
            
 

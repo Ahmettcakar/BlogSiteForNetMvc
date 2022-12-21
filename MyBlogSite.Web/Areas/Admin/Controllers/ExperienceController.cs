@@ -18,7 +18,7 @@ namespace MyBlogSite.Web.Areas.Admin.Controllers
 		{
 			return View();
 		}
-        public IActionResult GetAllExperience()
+        public IActionResult GetAllExperience(Guid id)
         {
             return Json(_db.experiences.Where(e => e.IsActive == true && e.IsDeleted == false).OrderByDescending(e => e.EndDate).ToList() );
         }
@@ -42,6 +42,18 @@ namespace MyBlogSite.Web.Areas.Admin.Controllers
             _db.SaveChanges();
             return Json(experience);    
         }
+
+        public IActionResult AddExperience(List<Experience> experiences)
+        {
+            
+            foreach(var item in experiences)
+            {
+            }
+
+            return Json("başarılı");
+        }
+
+
 
     }
 }
