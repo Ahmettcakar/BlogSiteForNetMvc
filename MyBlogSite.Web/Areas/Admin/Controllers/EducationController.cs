@@ -1,5 +1,6 @@
 ﻿using Data;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 
 namespace MyBlogSite.Web.Areas.Admin.Controllers
 {
@@ -22,8 +23,13 @@ namespace MyBlogSite.Web.Areas.Admin.Controllers
 		{
 			return Json(new {data=_db.educations.Where(e => e.IsActive == true && e.IsDeleted == false).OrderByDescending(e => e.endDate).ToList() });
 		}
+		[HttpPost]
+        public IActionResult UpdateEducation(Education education)
+        {
+			Education e = _db.educations.Find(education.Id);
+            return Json(e);
+        }
 
 
-
-	}
+    }
 }
