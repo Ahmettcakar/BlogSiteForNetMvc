@@ -11,7 +11,7 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Buttons example</h4>
+                <h4 class="card-title">Eğitim Listesi</h4>
                 
 
                 <table id="table" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -39,7 +39,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myExtraLargeModalLabel">Deneyimler</h5>
+                <h5 class="modal-title" id="myExtraLargeModalLabel">Eğitimi Düzenle</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
@@ -48,7 +48,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Example</h4>
+                               
                                 <form id="form" enctype="multipart/form-data">
                                     <div data-repeater-list="group-a">
                                         <div data-repeater-item class="row form">
@@ -75,7 +75,7 @@
 
                                             <div class="col-sm-2 align-self-center">
                                                 <div class="d-grid">
-                                                    <input id="btnSaveEducation" data-repeater-delete type="button" class="btn btn-primary" value=" Kaydet" />
+                                                    <input id="btnSaveEducation" onclick="updateEducation()" data-repeater-delete type="button" class="btn btn-primary" value=" Kaydet" />
                                                 </div>
                                             </div>
 
@@ -104,10 +104,10 @@
 @section Scripts{
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 <script type="text/javascript">
-
+        var dataTable;
     $(document).ready(function (){
-
-        var dataTable=$("#table").DataTable({
+       
+         dataTable=$("#table").DataTable({
                 ajax: "@Url.Action("GetAllEducation","Education")",
                 columns: [
                     { data: 'name' },
@@ -141,10 +141,14 @@
             }
             $.ajax({
                 type:"POST",
-                url: "@Url.Action("UpdateEducation","Education")",
+                url: "@Url.Action("EditEducation","Education")",
                 data:veri,
                 success:function(res){
-                    console.log(res);
+                    $("#name").val(res.name);
+                    $("#description").val(res.description);
+                    $("#startDate").val(new Date(res.startDate).toLocaleDateString());
+                    $("#endDate").val(new Date(res.endDate).toLocaleDateString());
+                    $("#profileId").val(res.id);
 
                 }
             
@@ -152,6 +156,28 @@
 
 
 
+    }
+    function updateEducation(){
+        var veri={
+                id: $("#profileId").val(),
+                name:$("#name").val(),
+                description:$("#description").val(),
+                startDate:$("#startDate").val(),
+                endDate: $("#endDate").val()
+
+        }
+        $.ajax({
+            type:"Post",
+            data:veri,
+            url:"@Url.Action("UpdateEducation","Education")",
+            success:function(data){
+
+               dataTable.ajax.reload();
+               $("#modal").modal("hide");
+            }
+
+
+        });
     }
 </script>
 

@@ -24,12 +24,24 @@ namespace MyBlogSite.Web.Areas.Admin.Controllers
 			return Json(new {data=_db.educations.Where(e => e.IsActive == true && e.IsDeleted == false).OrderByDescending(e => e.endDate).ToList() });
 		}
 		[HttpPost]
-        public IActionResult UpdateEducation(Education education)
+        public IActionResult EditEducation(Education education)
         {
 			Education e = _db.educations.Find(education.Id);
             return Json(e);
         }
-
+        [HttpPost]
+        public IActionResult UpdateEducation(Education education)
+        {
+			Education e = _db.educations.Find(education.Id);
+			e.description=education.description;	
+			e.endDate=education.endDate;
+			e.startDate=education.startDate;
+			e.name=education.name;
+			
+			_db.educations.Update(e);
+			_db.SaveChanges();
+            return Json(education);
+        }
 
     }
 }
