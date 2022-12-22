@@ -43,5 +43,13 @@ namespace MyBlogSite.Web.Areas.Admin.Controllers
             return Json(education);
         }
 
+		[HttpPost]
+        public IActionResult AddEducation(Education education)
+        {
+            _db.educations.Add(education);
+			_db.SaveChanges();
+            return Json(education);
+        }
+
     }
 }
