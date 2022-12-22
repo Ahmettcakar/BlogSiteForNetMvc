@@ -10,7 +10,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
+                <button id="btnEducationAdd"  class="btn btn-success waves-effect waves-light" type="button">Eğitimlerinizi Eklemek İçin Tıklayınız</button>
+                <hr>
                 <h4 class="card-title">Eğitim Listesi</h4>
                 
 
@@ -35,6 +36,75 @@
         </div>
     </div> <!-- end col -->
 </div> <!-- end row -->
+
+
+<div id="modalAdd" class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myExtraLargeModalLabel">Eğitimi Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <form id="form" enctype="multipart/form-data">
+                                    <div data-repeater-list="group-a">
+                                        <div data-repeater-item class="row form">
+                                            <div class="mb-3 col-sm-2">
+                                                <label class="form-label" for="name">Eğitim Kurumu</label>
+                                                <input type="text" id="name" name="untyped-input" class="form-control" placeholder="" />
+                                            </div>
+
+                                            <div class="mb-3 col-sm-2">
+                                                <label class="form-label" for="startDate">Başlangıç Tarihi</label>
+                                                <input type="text" id="startDate" name="startDate" class="form-control" placeholder="" />
+                                            </div>
+
+                                            <div class="mb-3 col-sm-2">
+                                                <label class="form-label" for="endDate">Bitiş Tarihi</label>
+                                                <input type="text" id="endDate" name="endDate" class="form-control" placeholder="" />
+                                            </div>
+
+                                            <div class="mb-3 col-lg-4">
+                                                <label class="form-label" for="description">Açıklama</label>
+                                                <textarea name="description" id="description" class="form-control" placeholder=""></textarea>
+                                            </div>
+
+
+                                            <div class="col-sm-2 align-self-center">
+                                                <div class="d-grid">
+                                                    <input id="btnAddEducation"  data-repeater-delete type="button" class="btn btn-primary" value="Eğitim Ekle" />
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <input id="profileId" type="hidden" class="btn btn-primary" value="" />
+
+                                    </div>
+
+
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
 <div id="modal" class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -157,7 +227,7 @@
 
 
     }
-    function updateEducation(){
+        function updateEducation(){
         var veri={
                 id: $("#profileId").val(),
                 name:$("#name").val(),
@@ -174,11 +244,55 @@
 
                dataTable.ajax.reload();
                $("#modal").modal("hide");
+                    $("#btnSaveEducation").off();
             }
 
 
         });
     }
+
+        $("#btnEducationAdd").click(function () {
+            var columnProfileId=$("#table tr td:first-child").next().next().next().next().html();
+            $("#modalAdd").modal("show");
+            $("#btnAddEducation").val("Deneyim Ekle");
+
+            $("#btnAddEducation").click(function(){
+
+                var veri = {
+                    profileId: columnProfileId,
+                    name: $("#name").val(),
+                    description: $("#description").val(),
+                    startDate: $("#startDate").val(),
+                    endDate: $("#endDate").val()
+
+                }
+            
+            $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("AddEducation","Education")",
+                    data: veri,
+                    success: function (res) {
+                        $("#name").val("");
+                        $("#description").val("");
+                        $("#startDate").val("");
+                        $("#endDate").val("");
+                        $("#profileId").val("");
+                        $("#btnAddEducation").off();
+                        $("#modalAdd").modal("hide");
+                        dataTable.ajax.reload();
+
+                    }
+            
+            
+            });
+            
+            });
+
+            
+        });
+
+
+       
 </script>
 
 
