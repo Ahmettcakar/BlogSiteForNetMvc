@@ -51,5 +51,16 @@ namespace MyBlogSite.Web.Areas.Admin.Controllers
             return Json(education);
         }
 
+		[HttpPost]
+        public IActionResult DeleteEducation(Education education)
+        {
+            Education e = _db.educations.Find(education.Id);
+            e.DateModified = DateTime.Now;
+            e.IsDeleted = true;
+            _db.educations.Update(e);
+            _db.SaveChanges();
+            return Json(e);
+        }
+
     }
 }

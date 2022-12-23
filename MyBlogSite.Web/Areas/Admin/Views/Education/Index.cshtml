@@ -190,7 +190,7 @@
 
                             return `<a onclick="editEducation('${data}')"  class="btn btn-outline-success btn-sm edit" title="Düzenle">
                                     <i class="uil-comment-alt-edit"></i>
-                                               <a onclick=""  class="btn btn-outline-dark btn-sm edit" title="Sil">
+                                                       <a onclick="deleteEducation('${data}')"  class="btn btn-outline-dark btn-sm edit" title="Sil">
                                                        <i class="uil-trash-alt"></i>
                                             `
 
@@ -204,6 +204,43 @@
           
    
     });
+
+        function deleteEducation(id) {
+            Swal.fire({
+                title: 'Silmek İstediğinizden Emin Misiniz',
+
+                showCancelButton: true,
+                confirmButtonText: 'Evet',
+
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+
+                    var veri = {
+                        id: id
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("DeleteEducation","Education")",
+                        data: veri,
+                        success: function (data) {
+                          dataTable.ajax.reload();
+                        }
+                    });
+
+
+                    Swal.fire('Silme İşlemi Başarılı!', 'Başarılı')
+                }
+            })
+        }
+
+
+
+
+
+
+
+
         function editEducation(id){
             $("#modal").modal("show");
             var veri={
