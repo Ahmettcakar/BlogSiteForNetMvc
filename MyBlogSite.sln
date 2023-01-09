@@ -5,9 +5,11 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlogSite.Web", "MyBlogSite.Web\MyBlogSite.Web.csproj", "{30FA8881-9C22-4005-95B1-2E9CA76BCCC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{8BAC3B3B-0F89-4FA2-9346-E0B7A56B4DFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{8BAC3B3B-0F89-4FA2-9346-E0B7A56B4DFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{4A0B32F8-CF17-4EB4-BA4E-9AEDCF4058FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{4A0B32F8-CF17-4EB4-BA4E-9AEDCF4058FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utulity", "Utulity\Utulity.csproj", "{C838A04B-E656-4BEE-AB72-7C289C6BBB4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{4A0B32F8-CF17-4EB4-BA4E-9AEDCF4058FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A0B32F8-CF17-4EB4-BA4E-9AEDCF4058FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A0B32F8-CF17-4EB4-BA4E-9AEDCF4058FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C838A04B-E656-4BEE-AB72-7C289C6BBB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C838A04B-E656-4BEE-AB72-7C289C6BBB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C838A04B-E656-4BEE-AB72-7C289C6BBB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C838A04B-E656-4BEE-AB72-7C289C6BBB4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
